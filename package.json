@@ -1,0 +1,16 @@
+{
+  "name": "cdp-recruitment-javascript",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "rm -rf ./coverage && vitest run --config ./vitest.config.js --coverage && open ./coverage/index.html"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "devDependencies": {
+    "@vitest/coverage-v8": "^3.0.8",
+    "vitest": "^3.0.8"
+  }
+}
