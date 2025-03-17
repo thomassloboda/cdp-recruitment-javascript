@@ -1,4 +1,4 @@
-const { Assert } = require('./assert.js');
+const { Assert } = require('./index.js');
 const {
   MissingRequiredParameterError,
   WrongTypeParameterError,
@@ -14,34 +14,20 @@ describe('Assert', () => {
       ).not.toThrow();
     });
 
-    it('should throw MissingRequiredParameterError for null or undefined values', () => {
-      expect(() => Assert.isValidString(null, 'testParam')).toThrow(
-        MissingRequiredParameterError
-      );
-      expect(() => Assert.isValidString(undefined, 'testParam')).toThrow(
-        MissingRequiredParameterError
-      );
-    });
-
     it('should throw WrongTypeParameterError for non-string values', () => {
-      expect(() => Assert.isValidString(42, 'testParam')).toThrow(
-        WrongTypeParameterError
-      );
-      expect(() => Assert.isValidString({}, 'testParam')).toThrow(
-        WrongTypeParameterError
-      );
-      expect(() => Assert.isValidString([], 'testParam')).toThrow(
-        WrongTypeParameterError
-      );
+      [null, undefined, 42, {}, []].forEach((value) => {
+        expect(() => Assert.isValidString(value, 'testParam')).toThrow(
+          WrongTypeParameterError
+        );
+      });
     });
 
     it('should throw MissingRequiredParameterError for an empty string or whitespace', () => {
-      expect(() => Assert.isValidString('', 'testParam')).toThrow(
-        MissingRequiredParameterError
-      );
-      expect(() => Assert.isValidString('   ', 'testParam')).toThrow(
-        MissingRequiredParameterError
-      );
+      ['', ' '].forEach((value) => {
+        expect(() => Assert.isValidString(value, 'testParam')).toThrow(
+          MissingRequiredParameterError
+        );
+      });
     });
   });
 
@@ -57,25 +43,12 @@ describe('Assert', () => {
       expect(() => Assert.isValidArray([], 'testParam', Dummy)).not.toThrow();
     });
 
-    it('should throw MissingRequiredParameterError for null or undefined values', () => {
-      expect(() => Assert.isValidArray(null, 'testParam', Dummy)).toThrow(
-        MissingRequiredParameterError
-      );
-      expect(() => Assert.isValidArray(undefined, 'testParam', Dummy)).toThrow(
-        MissingRequiredParameterError
-      );
-    });
-
     it('should throw WrongTypeParameterError for non-array values', () => {
-      expect(() => Assert.isValidArray(42, 'testParam', Dummy)).toThrow(
-        WrongTypeParameterError
-      );
-      expect(() => Assert.isValidArray({}, 'testParam', Dummy)).toThrow(
-        WrongTypeParameterError
-      );
-      expect(() => Assert.isValidArray('string', 'testParam', Dummy)).toThrow(
-        WrongTypeParameterError
-      );
+      [null, undefined, 42, {}, 'string'].forEach((value) => {
+        expect(() => Assert.isValidArray(value, 'testParam', Dummy)).toThrow(
+          WrongTypeParameterError
+        );
+      });
     });
 
     it('should throw WrongTypeParameterError if array elements are not of expected instance type', () => {

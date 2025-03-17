@@ -1,5 +1,4 @@
-import { describe, expect, it, vi } from 'vitest';
-import { handledArgs } from './commands';
+const { handledArgs } = require('./index.js');
 
 describe('handledArgs', () => {
   it('returns default values when no arguments are provided', () => {

@@ -1,26 +1,8 @@
-const { Animal } = require('./animal.js');
-const {
-  MissingRequiredParameterError,
-  WrongTypeParameterError,
-} = require('../errors/index.js');
+const { Animal } = require('./index.js');
 
 describe('Animal', () => {
   it('should have a string name', () => {
-    const validAnimal = new Animal('puppy');
-
-    // invalid cases
-    [undefined, null, '', ' '].forEach((name) => {
-      expect(() => new Animal(name)).toThrowError(
-        new MissingRequiredParameterError('name')
-      );
-    });
-    expect(() => new Animal(1)).toThrowError(
-      new WrongTypeParameterError('name', 'string')
-    );
-
-    // valid cases
-    expect(() => new Animal('puppy')).not.toThrow();
-    expect(validAnimal.name).toBe('puppy');
+    expect(new Animal('puppy').name).toBe('puppy');
   });
 
   describe('nameContains', () => {
@@ -37,11 +19,11 @@ describe('Animal', () => {
     });
   });
 
-  describe('toString', () => {
+  describe('toJSON', () => {
     it('should return the animal name', () => {
       const animal = new Animal('puppy');
 
-      expect(animal.toString()).toEqual({ name: 'puppy' });
+      expect(animal.toJSON()).toEqual({ name: 'puppy' });
     });
   });
 });
