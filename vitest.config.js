@@ -1,6 +1,6 @@
 import {defineConfig} from 'vitest/config';
 
-export default defineConfig({
+module.exports = defineConfig({
     test: {
         globals: true,
         include: ['src/**/*.spec.js'],
@@ -11,4 +11,4 @@ export default defineConfig({
             reporter: ['json', 'html'],
         },
     }
-})
+});
